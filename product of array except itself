@@ -1,0 +1,74 @@
+class Solution:
+    class Node:
+        def __init__(self, data):
+            self.data = data
+            self.next = None
+
+    class CircularLinkedList:
+        def __init__(self):
+            self.head = None
+            
+        def insert(self, newnode):
+            node = self.head
+            newnode.next = self.head
+            if self.head is None:
+                self.head = newnode
+                self.head.next = self.head
+                return
+            else:
+                while node.next is not self.head:
+                    node = node.next
+                node.next = newnode
+                return
+                
+        def __repr__(self):
+            node = self.head
+            nodes = []
+            while node.next is not self.head:
+                nodes.append(node.data)
+                node = node.next
+            nodes.append(node.data)
+            nodes.append(self.head.data)
+            return " <-> ".join(nodes)
+
+        def product_traverse(self):
+            
+            temp = self.head
+            answer = []
+            
+            # If linked list is not empty
+            if temp.next is not self.head:
+                while(True):
+                    
+                    node = temp
+                    product = 1
+                    # Print nodes till we reach first node again
+                    while node.next is not temp:
+                        node = node.next
+                        product *= int(node.data)
+                        
+                    answer.append(product)
+
+                    temp = temp.next
+                    if temp == self.head:
+                        break
+            return answer
+
+    
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        if len(nums) < 2 or len(nums) > 10*10*10*10*10:
+            return
+        clist = Solution.CircularLinkedList()
+        for i in nums:
+            clist.insert(Solution.Node(str(i))) 
+        return clist.product_traverse()
+        
+        
+    output:
+    Input
+nums =
+[1,2,3,4]
+Output
+[24,12,8,6]
+Expected
+[24,12,8,6]
