@@ -1,0 +1,53 @@
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
+
+Return the merged string.
+
+ 
+
+Example 1:
+
+Input: word1 = "abc", word2 = "pqr"
+Output: "apbqcr"
+Explanation: The merged string will be merged as so:
+word1:  a   b   c
+word2:    p   q   r
+merged: a p b q c r
+Example 2:
+
+Input: word1 = "ab", word2 = "pqrs"
+Output: "apbqrs"
+Explanation: Notice that as word2 is longer, "rs" is appended to the end.
+word1:  a   b 
+word2:    p   q   r   s
+merged: a p b q   r   s
+
+code: 
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        string = ''
+        j = 0
+        if word1 == None or word2 == None:
+            return -1
+        if len(word1)>0 and len(word2)>0:
+            for i in word1:
+                string += i
+                print(string)
+                while j<len(word2):
+                    string += word2[j]
+                    j += 1
+                    print(string)
+                    break
+        if len(word2)>len(word1):
+            for i in range(len(word1), len(word2)):
+                string += word2[i]
+        return(string)
+
+Input
+word1 =
+"abcd"
+word2 =
+"pq"
+Output
+"apbqcd"
+Expected
+"apbqcd"
